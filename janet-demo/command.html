@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Never 86'd · Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#070807;color:#f4efe6;font-family:Inter,system-ui,sans-serif}
+body{min-height:100vh;background:radial-gradient(1100px 700px at 85% -8%,#1c2420,#070807 58%)}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 6vw;border-bottom:1px solid rgba(244,239,230,.1)}
+.brand{font-weight:800;letter-spacing:.04em}header a{color:#c5e86a;text-decoration:none;font-size:13px}
+main{padding:4vh 6vw 10vh;max-width:1180px;margin:0 auto}
+.badge{display:inline-flex;border:1px solid #d99a35;color:#f0c36a;padding:5px 10px;border-radius:999px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,5vw,64px);line-height:.95;margin:12px 0}
+.sub{max-width:52ch;color:#c9d1c8}
+.roles{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}
+.roles button{border:1px solid rgba(244,239,230,.18);background:transparent;color:#f4efe6;padding:10px 14px;border-radius:999px;cursor:pointer;font:inherit;font-weight:700}
+.roles button.on{background:#c5e86a;color:#111;border-color:#c5e86a}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0 24px}
+.m{background:rgba(18,20,18,.86);border:1px solid rgba(244,239,230,.12);border-radius:16px;padding:14px}
+.m b{display:block;font-family:"Instrument Serif",serif;font-size:28px;margin-top:6px}
+.m span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#9aa89f}
+.desk{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+.card{background:rgba(18,20,18,.88);border:1px solid rgba(244,239,230,.12);border-radius:18px;padding:20px}
+.card h3{margin:0 0 8px;color:#f0c36a;letter-spacing:.14em;text-transform:uppercase;font-size:12px}
+.card p{color:#dce4db;line-height:1.45}
+.push{position:fixed;right:24px;bottom:24px;width:320px;background:#121412;border:1px solid #c5e86a;border-radius:16px;padding:14px 16px;box-shadow:0 20px 60px rgba(0,0,0,.4);display:none}
+.push.on{display:block;animation:up .4s ease}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.warn{color:#f0c36a}a.store{color:#c5e86a}
+@media(max-width:900px){.strip,.desk{grid-template-columns:1fr}.push{left:16px;right:16px;width:auto}}
+</style></head>
+<body>
+<header>
+  <div class="brand">NEVER 86'D · COMMAND</div>
+  <a href="operator.html">← Act 1 operator loop</a>
+</header>
+<main>
+  <div class="badge">Act 2 · vision desk · public case figures</div>
+  <h1>Same leak. Right altitude.</h1>
+  <p class="sub">C-level sees the network. Area and district see the cluster. GM gets tonight’s move. Push goes to one owner. Drill down lands on Location 07 — the same void walk from Act 1.</p>
+  <div class="roles" id="roles"></div>
+  <div class="strip">
+    <div class="m"><span>Stores</span><b>16</b></div>
+    <div class="m"><span>Orders checked</span><b>545,677</b></div>
+    <div class="m"><span>Net checked</span><b>$15.72M</b></div>
+    <div class="m"><span>Labeled leak</span><b>$1.81M</b></div>
+  </div>
+  <div class="desk">
+    <div class="card" id="view"></div>
+    <div class="card">
+      <h3>Drill-down rule</h3>
+      <p>Network → area → district → store → owner + proof. Verbal yes does not close.</p>
+      <p><a class="store" href="operator.html">Open Location 07 in the operator loop →</a></p>
+      <p class="warn">$1.81M is a published labeled surface after a walk-back from $8.3M. Not booked savings. Customer name stays off this page.</p>
+    </div>
+  </div>
+</main>
+<div class="push on" id="push"></div>
+<script>
+const roles=[
+  {id:'ceo',label:'C-level',push:'Network · late-night voids concentrated in District 2.',view:'<h3>CEO / founder desk</h3><p>Rank by dollars this week, not eight charts. $1.81M labeled leak across 16 stores. First question: which district owns the next close.</p><p>Push: District 2 · Location 07 voids after 9pm vs house baseline.</p>'},
+  {id:'cfo',label:'CFO / books',push:'Books desk · which exception enters the monthly package.',view:'<h3>CFO / books desk</h3><p>The accountant does not need another dashboard. She needs the receipt: cash proof, 3P gross vs net, payout coding.</p><p>Push: $68 cash variance at Location 07 still has no slip attached.</p>'},
+  {id:'area',label:'Area leader',push:'Area East · 4 stores. Two are loud after nine.',view:'<h3>Area leader</h3><p>Four stores. Two share the late-night void pattern. Action: one close-reason rule for the next three nights, same daypart.</p>'},
+  {id:'district',label:'District manager',push:'District 2 · Location 07 · 2.2% voids vs 1.4% baseline.',view:'<h3>District manager</h3><p>Location 07 is the unit. Observed $4,090 / 14 days. Next action sits on the closing lead. Proof: three signed close logs + void-reason export.</p>'},
+  {id:'gm',label:'GM',push:'Tonight · name the void reason before the check closes.',view:'<h3>GM / store</h3><p>Tonight only. Every void after 9pm gets a reason before the check closes. Resolved only if the next three same-daypart closes drop under 1.8%.</p>'}
+];
+const wrap=document.getElementById('roles');
+roles.forEach((r,i)=>{
+  const b=document.createElement('button');b.textContent=r.label;if(i===0)b.className='on';
+  b.onclick=()=>pick(i);wrap.appendChild(b);
+});
+function pick(i){
+  [...wrap.children].forEach((b,idx)=>b.classList.toggle('on',idx===i));
+  document.getElementById('view').innerHTML=roles[i].view;
+  const p=document.getElementById('push');p.className='push on';p.innerHTML='<strong>Push · '+roles[i].label+'</strong><div style="margin-top:6px;color:#dce4db">'+roles[i].push+'</div>';
+}
+pick(0);
+</script>
+</body></html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Never 86'd · Small operator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#15120f;--paper:#f4efe6;--panel:#fffaf3;--gold:#d99a35}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#000;color:var(--paper);font-family:Inter,system-ui,sans-serif}body{overflow:hidden}
+.stage{position:relative;height:100vh}.grid{position:absolute;inset:0;opacity:.16;pointer-events:none;background-image:linear-gradient(rgba(197,232,106,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(197,232,106,.08) 1px,transparent 1px);background-size:48px 48px}
+.scene{position:absolute;inset:0;display:none;padding:7vh 7vw;flex-direction:column;justify-content:center}.scene.on{display:flex;animation:up .6s ease both}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.kicker{letter-spacing:.2em;text-transform:uppercase;font-size:11px;color:#b7c0b6;font-weight:700}
+.badge{display:inline-flex;border:1px solid var(--gold);color:#f0c36a;padding:5px 10px;border-radius:999px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;width:max-content}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,5.6vw,80px);line-height:.94;margin:12px 0 16px;max-width:18ch}
+.sub{max-width:48ch;color:#c9d1c8;font-size:17px;line-height:1.5}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+button,a.btn{appearance:none;border:0;cursor:pointer;font:inherit;font-weight:700;background:#c5e86a;color:#111;padding:13px 16px;border-radius:999px;text-decoration:none;display:inline-flex}
+button.ghost,a.ghost{background:transparent;color:var(--paper);border:1px solid rgba(244,239,230,.25)}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:10px;margin-top:22px}
+.metric,.card{background:rgba(18,20,18,.86);border:1px solid rgba(244,239,230,.12);border-radius:18px;padding:16px}
+.metric b{display:block;font-family:"Instrument Serif",serif;font-size:30px;margin-top:6px}
+.metric span,.card h3{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9aa89f}
+.panel{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:20px}
+.card h3{margin:0 0 8px;color:#f0c36a}.card p{margin:0 0 8px;color:#dce4db;line-height:1.45}
+.receipt{background:var(--panel);color:var(--ink);padding:22px}.receipt h2{font-family:"Instrument Serif",serif;font-size:30px;margin:0 0 8px}
+.line{display:flex;justify-content:space-between;border-bottom:1px dashed #d9d0c7;padding:7px 0}
+.drop{border:1.5px dashed rgba(197,232,106,.45);border-radius:22px;padding:28px;min-height:170px;background:rgba(18,20,18,.55)}
+.drop.hot{border-color:#c5e86a}
+.hud{position:fixed;left:7vw;right:7vw;bottom:3vh;display:flex;justify-content:space-between;font-size:12px;color:#9aa89f}
+.ticks{display:flex;gap:5px}.ticks i{width:22px;height:3px;background:rgba(244,239,230,.18);display:block}.ticks i.on{background:#c5e86a}
+.dark{background:radial-gradient(1000px 700px at 80% -10%,#1c2420,#070807 60%)}
+.paper{background:radial-gradient(1200px 600px at 20% 0%,#2a241c,#0b0c0b 55%)}
+.warn{color:#f0c36a}
+@media(max-width:900px){.metrics,.panel{grid-template-columns:1fr}}
+</style></head>
+<body>
+<div class="stage dark" id="stage"><div class="grid"></div>
+<section class="scene on" data-scene="0">
+<div class="badge">Act 1 · small operator</div>
+<div class="kicker" style="margin-top:16px">One store · one seat</div>
+<h1>The seat that changes what people do tomorrow.</h1>
+<p class="sub">Drop last night. One next action. Night proof. Janet books the receipt. Command Center comes after this loop.</p>
+<div class="row"><button data-next>Show the seat</button><a class="btn ghost" href="command.html">Skip to Command Center</a></div>
+</section>
+<section class="scene" data-scene="1">
+<div class="kicker">Behavior change</div>
+<h1>One person. One move. Proof or it stays open.</h1>
+<p class="sub">Kitchen, closer, FOH — each role gets today’s sentence. A verbal yes does not close the day.</p>
+<div class="metrics"><div class="metric"><span>Seat</span><b>Owner 1</b></div><div class="metric"><span>Moves</span><b>≤3</b></div><div class="metric"><span>Proof</span><b>Required</b></div><div class="metric"><span>Books</span><b>Receipt</b></div></div>
+</section>
+<section class="scene" data-scene="2">
+<div class="kicker">Drop · phone photo</div>
+<h1>They drop the file. Or they photograph the invoice.</h1>
+<div class="panel"><div class="drop" id="drop"><div class="badge">Unverified until the source lands</div><p class="sub" id="dropState" style="margin-top:12px">Drag a Z, invoice PDF, or photo. Same motion as MarginEdge — not a replacement. File stays on this laptop.</p></div>
+<div class="card"><h3>No portal password</h3><p>Close, invoice photo, labor card, marketplace statement.</p><p class="warn">POS library ≠ ten live APIs. Sysco is not connected in this meeting.</p></div></div>
+</section>
+<section class="scene" data-scene="3">
+<div class="kicker">Kitchen coach · sample</div>
+<h1>Tuesday. Cap $8,000. You’re at $6,000.</h1>
+<div class="panel"><div class="receipt"><div class="kicker" style="color:#6b625c">Sample week</div><h2>Spend governance</h2><div class="line"><span>Weekly cap</span><b>$8,000</b></div><div class="line"><span>Already in</span><b>$6,000</b></div><div class="line"><span>Room before Thursday</span><b>$2,000</b></div></div>
+<div class="card"><h3>Human coaching</h3><p>Do not order over $2,000 before Thursday’s truck.</p><p class="warn">No count → food HOLD. Not last week’s live books.</p></div></div>
+</section>
+<section class="scene" data-scene="4">
+<div class="kicker">Role next action</div>
+<h1>Each seat gets a different sentence.</h1>
+<div class="panel"><div class="card"><h3>Kitchen</h3><p>Hold Thursday to $2,000. Photo the invoice on the dock.</p></div><div class="card"><h3>Closer</h3><p>Match the $68 cash gap to the slip before you leave.</p></div></div>
+</section>
+<section class="scene" data-scene="5">
+<div class="kicker">Cash proof</div>
+<h1>Yesterday closed. $68 still needs a receipt.</h1>
+<div class="panel"><div class="receipt"><h2>Business-day close</h2><div class="line"><span>Gross / tickets</span><b>$4,820 · 187</b></div><div class="line"><span>Expected cash</span><b>$610.00</b></div><div class="line"><span>Entered deposit</span><b>$542.00</b></div><div class="line"><span>Variance</span><b>$68.00</b></div></div>
+<div class="card"><h3>Then code $38 payouts</h3><p>Review work. Not theft. Food stays HOLD.</p></div></div>
+</section>
+<section class="scene" data-scene="6">
+<div class="badge">Loop closed</div>
+<h1>Now the same leak, one altitude up.</h1>
+<p class="sub">That was the independent seat. Command Center is the group desk: C-level, area, district, GM. Same receipt. Different push.</p>
+<div class="row"><a class="btn" href="command.html">Open Command Center</a><a class="btn ghost" href="index.html">Back to doors</a></div>
+</section>
+</div>
+<div class="hud"><div>Space · Act 1 operator loop</div><div class="ticks" id="ticks"></div></div>
+<script>
+const scenes=[...document.querySelectorAll('.scene')];let i=0;const ticks=document.getElementById('ticks');
+scenes.forEach(()=>ticks.appendChild(document.createElement('i')));ticks.children[0].className='on';
+function show(n){i=Math.max(0,Math.min(scenes.length-1,n));scenes.forEach((s,idx)=>s.classList.toggle('on',idx===i));[...ticks.children].forEach((t,idx)=>t.classList.toggle('on',idx<=i));document.getElementById('stage').className='stage '+(i===2||i===3||i===5?'paper':'dark');}
+function next(){show(i+1)}
+document.body.addEventListener('click',e=>{if(e.target.dataset.next!==undefined)return next();if(e.target.closest('a'))return;if(e.target.tagName!=='BUTTON')next();});
+window.addEventListener('keydown',e=>{if(e.key===' '||e.key==='ArrowRight'){e.preventDefault();next()}if(e.key==='ArrowLeft'){e.preventDefault();show(i-1)}});
+const drop=document.getElementById('drop'),state=document.getElementById('dropState');
+;['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('hot')}));
+;['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('hot')}));
+drop.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)state.textContent='Loaded on this laptop: '+f.name+' — Unverified. Not uploaded.';e.stopPropagation();});
+</script>
+</body></html>
