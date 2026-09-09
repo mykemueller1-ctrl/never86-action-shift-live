@@ -3,87 +3,197 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Never 86'd · Janet Lewis · Warner Mountain Bookkeeping</title>
+<title>Never 86'd · Command Center + Next Action</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#070a09; --bg2:#0c1110; --card:#111816; --card2:#161d1a;
-  --ink:#eef3ef; --muted:#8b9a92; --line:#22302b; --line2:#2c3a35;
-  --go:#b8e24a; --go-d:#9bc93a; --warn:#f0b24a; --bad:#ff6b6b; --ok:#5fd0a0;
-  --mono:'JetBrains Mono',ui-monospace,monospace; --sans:'Inter',system-ui,sans-serif;
+  --ink:#15120f;--paper:#f4efe6;--panel:#fffaf3;--muted:#6b625c;--line:#d9d0c7;
+  --red:#c74332;--green:#2b7a58;--gold:#d99a35;--dark:#0b0c0b;--card:#121412;
+  --fog:rgba(244,239,230,.08);
 }
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
-body{min-height:100vh;background:
-  radial-gradient(1200px 600px at 80% -10%, rgba(184,226,74,.06), transparent 60%),
-  radial-gradient(900px 500px at -10% 110%, rgba(95,208,160,.05), transparent 55%),
-  var(--bg);}
-.wrap{max-width:1040px;margin:0 auto;padding:48px 24px 96px}
-.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-.brand{display:flex;align-items:center;gap:10px;margin-bottom:28px}
-.mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--go),#7fb83a);display:grid;place-items:center;font-weight:800;color:#0a0d0b;font-family:var(--mono)}
-.brand b{font-size:15px;letter-spacing:.02em}
-.brand span{color:var(--muted);font-size:13px}
-h1{font-size:clamp(30px,5vw,46px);line-height:1.08;margin:6px 0 14px;font-weight:800;letter-spacing:-.02em}
-.lead{color:#cdd6d1;font-size:18px;line-height:1.55;max-width:680px;margin:0 0 34px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media(max-width:760px){.grid{grid-template-columns:1fr}}
-.card{position:relative;background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;padding:24px;overflow:hidden;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
-.card:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:0 18px 50px -20px rgba(0,0,0,.7)}
-.card::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--go),transparent);opacity:.5}
-.badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--warn);border:1px solid rgba(240,178,74,.35);background:rgba(240,178,74,.08);padding:4px 9px;border-radius:999px}
-.card h2{font-size:21px;margin:14px 0 6px;font-weight:700}
-.card p{color:#b9c4be;font-size:14.5px;line-height:1.5;margin:0 0 16px}
-.metric{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding:9px 0;font-size:13.5px}
-.metric:first-of-type{border-top:0}
-.metric b{font-family:var(--mono);font-weight:700;color:var(--ink)}
-.metric .m{color:var(--muted)}
-.btn{display:inline-flex;align-items:center;gap:8px;background:var(--go);color:#0a0d0b;text-decoration:none;font-weight:700;font-size:14px;padding:12px 16px;border-radius:11px;transition:background .2s ease,transform .15s ease}
-.btn:hover{background:var(--go-d);transform:translateY(-1px)}
-.foot{margin-top:34px;font-family:var(--mono);font-size:11px;color:var(--muted);line-height:1.7}
-.foot b{color:var(--ink)}
-.pulse{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(95,208,160,.6);animation:p 2s infinite}
-@keyframes p{0%{box-shadow:0 0 0 0 rgba(95,208,160,.5)}70%{box-shadow:0 0 0 8px rgba(95,208,160,0)}100%{box-shadow:0 0 0 0 rgba(95,208,160,0)}}
+html,body{margin:0;height:100%;background:#000;color:var(--paper);font-family:Inter,system-ui,sans-serif}
+body{overflow:hidden}
+.stage{position:relative;height:100vh;width:100vw;overflow:hidden}
+.letter{position:absolute;inset:0;pointer-events:none;background:linear-gradient(#000,#000) top/100% 4vh no-repeat,linear-gradient(#000,#000) bottom/100% 4vh no-repeat}
+.grid{
+  position:absolute;inset:0;opacity:.18;pointer-events:none;
+  background-image:linear-gradient(rgba(197,232,106,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(197,232,106,.08) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.scan{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 0%,rgba(197,232,106,.04) 50%,transparent 100%);animation:scan 9s linear infinite}
+@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
+.scene{position:absolute;inset:0;display:none;padding:8vh 8vw;opacity:0;transform:translateY(12px)}
+.scene.on{display:flex;flex-direction:column;justify-content:center;animation:up .7s ease both}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.kicker{letter-spacing:.22em;text-transform:uppercase;font-size:11px;color:#b7c0b6;font-weight:700}
+.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--gold);color:#f0c36a;padding:5px 10px;border-radius:999px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;width:max-content}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(42px,6.4vw,92px);line-height:.92;margin:14px 0 18px;max-width:16ch}
+.sub{max-width:46ch;color:#c9d1c8;font-size:18px;line-height:1.5}
+.row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+button{
+  appearance:none;border:0;cursor:pointer;font:inherit;font-weight:700;
+  background:#c5e86a;color:#111;padding:14px 18px;border-radius:999px;
+}
+button.ghost{background:transparent;color:var(--paper);border:1px solid rgba(244,239,230,.25)}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:12px;margin-top:28px}
+.metric{background:rgba(18,20,18,.82);border:1px solid rgba(244,239,230,.12);padding:18px 16px;border-radius:18px;backdrop-filter:blur(12px)}
+.metric b{display:block;font-family:"Instrument Serif",serif;font-size:34px;line-height:1;margin-top:8px}
+.metric span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9aa89f}
+.panel{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:26px}
+.card{background:rgba(18,20,18,.88);border:1px solid rgba(244,239,230,.12);border-radius:22px;padding:22px}
+.card h3{margin:0 0 10px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#f0c36a}
+.card p{margin:0 0 10px;color:#dce4db;line-height:1.45}
+.receipt{background:var(--panel);color:var(--ink);border-radius:4px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.receipt h2{font-family:"Instrument Serif",serif;font-size:34px;margin:0 0 8px}
+.line{display:flex;justify-content:space-between;border-bottom:1px dashed #d9d0c7;padding:8px 0;font-size:15px}
+.line b{font-variant-numeric:tabular-nums}
+.hud{position:fixed;left:8vw;right:8vw;bottom:3.4vh;display:flex;justify-content:space-between;align-items:center;z-index:5;font-size:12px;color:#9aa89f}
+.ticks{display:flex;gap:6px}
+.ticks i{width:28px;height:3px;background:rgba(244,239,230,.18);display:block}
+.ticks i.on{background:#c5e86a}
+.paper{background:radial-gradient(1200px 600px at 20% 0%,#2a241c 0%,#0b0c0b 55%)}
+.dark{background:radial-gradient(1000px 700px at 80% -10%,#1c2420 0%,#070807 60%)}
+.warn{color:#f0c36a}
+.ok{color:#9be7b0}
+@media (max-width:900px){
+  .metrics,.panel{grid-template-columns:1fr}
+  h1{font-size:44px}
+  .scene{padding:7vh 6vw}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="brand">
-    <div class="mark">86</div>
-    <div><b>Never 86'd</b> <span>· operator intelligence</span></div>
-  </div>
-  <div class="kicker">Warner Mountain Bookkeeping · Janet Lewis · 3:00 PM CDT</div>
-  <h1>Two end-to-end walks.<br>Last night gets a receipt before it hits the books.</h1>
-  <p class="lead">Not QuickBooks. Not another dashboard. Command Center ranks the exception. Next Action names the owner and the proof object. You stop reconstructing the month from a Z and a memory.</p>
+<div class="stage dark" id="stage">
+  <div class="grid"></div>
+  <div class="scan"></div>
+  <div class="letter"></div>
 
-  <div class="grid">
-    <div class="card">
-      <span class="badge"><span class="pulse"></span> SAMPLE · UNVERIFIED</span>
-      <h2>Demo 1 · Command Center</h2>
-      <p>One leak. One owner. One receipt. Location 07 late-night voids 2.2% vs 1.4% house baseline.</p>
-      <div class="metric"><span class="m">Observed leak</span><b>$4,090 / 14 days</b></div>
-      <div class="metric"><span class="m">Annualized signal</span><b>$38,589</b></div>
-      <div class="metric"><span class="m">Owner</span><b>Closing shift lead</b></div>
-      <a class="btn" href="command-center.html">Open Command Center →</a>
+  <section class="scene on" data-scene="0">
+    <div class="badge">Sanitized sample · not last night</div>
+    <div class="kicker" style="margin-top:18px">Warner Mountain Bookkeeping · Janet Lewis</div>
+    <h1>Last night becomes a receipt.</h1>
+    <p class="sub">Two walks. Command Center ranks the leak. Next Action names the owner and the proof. QuickBooks stays hers.</p>
+    <div class="row">
+      <button data-next>Begin the walks</button>
+      <button class="ghost" data-jump="4">Skip to cash proof</button>
     </div>
+  </section>
 
-    <div class="card">
-      <span class="badge"><span class="pulse"></span> SAMPLE · UNVERIFIED</span>
-      <h2>Demo 2 · Next Action</h2>
-      <p>Yesterday's close. Expected cash $610 vs entered $542. $68 unresolved — ranked, owned, proof-gated.</p>
-      <div class="metric"><span class="m">Variance</span><b>$68.00</b></div>
-      <div class="metric"><span class="m">Payouts to code</span><b>$38.00</b></div>
-      <div class="metric"><span class="m">Late tickets exposed</span><b>$214 · 47 min</b></div>
-      <a class="btn" href="next-action.html">Open Next Action →</a>
+  <section class="scene" data-scene="1">
+    <div class="kicker">Demo 1 · Command Center</div>
+    <h1>Location 07 is loud after nine.</h1>
+    <p class="sub">Fourteen-day window. Net $186,420. Voids after 9 PM sit at 2.2% against this house’s 1.4% baseline.</p>
+    <div class="metrics">
+      <div class="metric"><span>Void rate</span><b>2.2%</b></div>
+      <div class="metric"><span>House baseline</span><b>1.4%</b></div>
+      <div class="metric"><span>Observed</span><b>$4,090</b></div>
+      <div class="metric"><span>Annualized signal</span><b>$38,589</b></div>
     </div>
-  </div>
+  </section>
 
-  <div class="foot">
-    <b>Truth ladder:</b> POS ≠ payout ≠ bank. Commission ≠ total marketplace cost. Incomplete week stays Open.<br>
-    <b>Do not say:</b> guaranteed savings, theft, food cost without a count, "replaces QuickBooks." Verbal yes does not close.
-  </div>
+  <section class="scene" data-scene="2">
+    <div class="kicker">Command Center · one leak</div>
+    <h1>One owner. One proof object.</h1>
+    <div class="panel">
+      <div class="card">
+        <h3>Next action</h3>
+        <p>Every void after 9 PM for the next three closes. Name the reason before the check closes.</p>
+        <p><b>Owner:</b> Closing shift lead</p>
+        <p><b>Proof:</b> Three signed close logs + void-reason export.</p>
+      </div>
+      <div class="card">
+        <h3>Close rule</h3>
+        <p>Resolved only if the next three same-daypart closes drop under 1.8%.</p>
+        <p class="warn">$38,589 is a signal. Not booked savings. Verbal yes does not close.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="3">
+    <div class="kicker">Handoff to the books</div>
+    <h1>Janet gets the receipt, not a story.</h1>
+    <p class="sub">Waiting on the monthly P&amp;L hides which shift created the leak. The package can carry the exception, the owner, and the proof object.</p>
+  </section>
+
+  <section class="scene" data-scene="4">
+    <div class="kicker">Demo 2 · Next Action</div>
+    <h1>Yesterday closed. $68 still needs a receipt.</h1>
+    <div class="panel">
+      <div class="receipt">
+        <div class="kicker" style="color:#6b625c">Sample house · unverified</div>
+        <h2>Business-day close</h2>
+        <div class="line"><span>Gross / tickets</span><b>$4,820 · 187</b></div>
+        <div class="line"><span>Expected cash</span><b>$610.00</b></div>
+        <div class="line"><span>Entered deposit</span><b>$542.00</b></div>
+        <div class="line"><span>Variance</span><b>$68.00</b></div>
+        <div class="line"><span>Payouts</span><b>$38.00</b></div>
+      </div>
+      <div class="card">
+        <h3>Action 1 · Cash-proof</h3>
+        <p>Match the deposit slip to the close. Correct the entry or document the exception.</p>
+        <p><b>Owner:</b> Closing manager</p>
+        <p><b>Proof:</b> Slip or bank record.</p>
+        <p class="warn">Review work. Not theft. Not a shortage until the slip is matched.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="5">
+    <div class="kicker">Next Action · ranked queue</div>
+    <h1>Cash first. Then code the $38.</h1>
+    <div class="panel">
+      <div class="card">
+        <h3>Action 2 · Payout-proof</h3>
+        <p>$38 needs receipt, purpose, and ledger bucket before it hits a QBO class.</p>
+        <p class="ok">This is the file she can book from.</p>
+      </div>
+      <div class="card">
+        <h3>Hold</h3>
+        <p>Food cost stays HOLD. No same-day invoices and count. Invoice day is not daily prime.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="6">
+    <div class="badge">Close the room here</div>
+    <h1>Which exception goes in the monthly package first?</h1>
+    <p class="sub">Cash proof. Third-party gross versus net. Or payout coding. She picks. We do not replace her close.</p>
+    <div class="row">
+      <button data-jump="0">Replay</button>
+      <button class="ghost" data-jump="1">Command Center again</button>
+    </div>
+  </section>
 </div>
+
+<div class="hud">
+  <div>Space or click to advance · Never 86'd</div>
+  <div class="ticks" id="ticks"></div>
+</div>
+
+<script>
+const scenes=[...document.querySelectorAll('.scene')];
+let i=0;
+const ticks=document.getElementById('ticks');
+scenes.forEach((_,n)=>{const d=document.createElement('i');if(n===0)d.className='on';ticks.appendChild(d);});
+function show(n){
+  i=Math.max(0,Math.min(scenes.length-1,n));
+  scenes.forEach((s,idx)=>s.classList.toggle('on',idx===i));
+  [...ticks.children].forEach((t,idx)=>t.classList.toggle('on',idx<=i));
+  document.getElementById('stage').className='stage '+(i>=4?'paper':'dark');
+}
+function next(){show(i+1)}
+document.body.addEventListener('click',e=>{
+  if(e.target.dataset.next!==undefined) return next();
+  if(e.target.dataset.jump!==undefined) return show(+e.target.dataset.jump);
+  if(e.target.tagName!=='BUTTON') next();
+});
+window.addEventListener('keydown',e=>{
+  if(e.key===' ' || e.key==='ArrowRight'){e.preventDefault();next()}
+  if(e.key==='ArrowLeft'){e.preventDefault();show(i-1)}
+});
+</script>
 </body>
 </html>
