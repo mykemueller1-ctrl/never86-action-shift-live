@@ -3,123 +3,144 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Never 86'd · Command Center + Next Action</title>
+<title>Never 86'd · Operator seat</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#15120f;--paper:#f4efe6;--panel:#fffaf3;--muted:#6b625c;--line:#d9d0c7;
-  --red:#c74332;--green:#2b7a58;--gold:#d99a35;--dark:#0b0c0b;--card:#121412;
-  --fog:rgba(244,239,230,.08);
-}
+:root{--ink:#15120f;--paper:#f4efe6;--panel:#fffaf3;--muted:#6b625c;--line:#d9d0c7;--gold:#d99a35;--green:#2b7a58}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:#000;color:var(--paper);font-family:Inter,system-ui,sans-serif}
 body{overflow:hidden}
 .stage{position:relative;height:100vh;width:100vw;overflow:hidden}
 .letter{position:absolute;inset:0;pointer-events:none;background:linear-gradient(#000,#000) top/100% 4vh no-repeat,linear-gradient(#000,#000) bottom/100% 4vh no-repeat}
-.grid{
-  position:absolute;inset:0;opacity:.18;pointer-events:none;
-  background-image:linear-gradient(rgba(197,232,106,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(197,232,106,.08) 1px,transparent 1px);
-  background-size:48px 48px;
-}
-.scan{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 0%,rgba(197,232,106,.04) 50%,transparent 100%);animation:scan 9s linear infinite}
-@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
-.scene{position:absolute;inset:0;display:none;padding:8vh 8vw;opacity:0;transform:translateY(12px)}
-.scene.on{display:flex;flex-direction:column;justify-content:center;animation:up .7s ease both}
-@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.kicker{letter-spacing:.22em;text-transform:uppercase;font-size:11px;color:#b7c0b6;font-weight:700}
-.badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--gold);color:#f0c36a;padding:5px 10px;border-radius:999px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;width:max-content}
-h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(42px,6.4vw,92px);line-height:.92;margin:14px 0 18px;max-width:16ch}
-.sub{max-width:46ch;color:#c9d1c8;font-size:18px;line-height:1.5}
-.row{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
-button{
-  appearance:none;border:0;cursor:pointer;font:inherit;font-weight:700;
-  background:#c5e86a;color:#111;padding:14px 18px;border-radius:999px;
-}
+.grid{position:absolute;inset:0;opacity:.16;pointer-events:none;background-image:linear-gradient(rgba(197,232,106,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(197,232,106,.08) 1px,transparent 1px);background-size:48px 48px}
+.scene{position:absolute;inset:0;display:none;padding:7vh 7vw;flex-direction:column;justify-content:center}
+.scene.on{display:flex;animation:up .65s ease both}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.kicker{letter-spacing:.2em;text-transform:uppercase;font-size:11px;color:#b7c0b6;font-weight:700}
+.badge{display:inline-flex;border:1px solid var(--gold);color:#f0c36a;padding:5px 10px;border-radius:999px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;width:max-content}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(36px,5.6vw,84px);line-height:.94;margin:12px 0 16px;max-width:18ch}
+.sub{max-width:48ch;color:#c9d1c8;font-size:17px;line-height:1.5}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+button{appearance:none;border:0;cursor:pointer;font:inherit;font-weight:700;background:#c5e86a;color:#111;padding:13px 16px;border-radius:999px}
 button.ghost{background:transparent;color:var(--paper);border:1px solid rgba(244,239,230,.25)}
-.metrics{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:12px;margin-top:28px}
-.metric{background:rgba(18,20,18,.82);border:1px solid rgba(244,239,230,.12);padding:18px 16px;border-radius:18px;backdrop-filter:blur(12px)}
-.metric b{display:block;font-family:"Instrument Serif",serif;font-size:34px;line-height:1;margin-top:8px}
-.metric span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9aa89f}
-.panel{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:26px}
-.card{background:rgba(18,20,18,.88);border:1px solid rgba(244,239,230,.12);border-radius:22px;padding:22px}
-.card h3{margin:0 0 10px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:#f0c36a}
-.card p{margin:0 0 10px;color:#dce4db;line-height:1.45}
-.receipt{background:var(--panel);color:var(--ink);border-radius:4px;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
-.receipt h2{font-family:"Instrument Serif",serif;font-size:34px;margin:0 0 8px}
-.line{display:flex;justify-content:space-between;border-bottom:1px dashed #d9d0c7;padding:8px 0;font-size:15px}
-.line b{font-variant-numeric:tabular-nums}
-.hud{position:fixed;left:8vw;right:8vw;bottom:3.4vh;display:flex;justify-content:space-between;align-items:center;z-index:5;font-size:12px;color:#9aa89f}
-.ticks{display:flex;gap:6px}
-.ticks i{width:28px;height:3px;background:rgba(244,239,230,.18);display:block}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:10px;margin-top:22px}
+.metric,.card{background:rgba(18,20,18,.86);border:1px solid rgba(244,239,230,.12);border-radius:18px;padding:16px}
+.metric b{display:block;font-family:"Instrument Serif",serif;font-size:30px;margin-top:6px}
+.metric span,.card h3{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9aa89f}
+.panel{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:20px}
+.card h3{margin:0 0 8px;color:#f0c36a}
+.card p{margin:0 0 8px;color:#dce4db;line-height:1.45}
+.receipt{background:var(--panel);color:var(--ink);padding:22px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.receipt h2{font-family:"Instrument Serif",serif;font-size:30px;margin:0 0 8px}
+.line{display:flex;justify-content:space-between;border-bottom:1px dashed #d9d0c7;padding:7px 0;font-size:15px}
+.drop{border:1.5px dashed rgba(197,232,106,.45);border-radius:22px;padding:28px;min-height:180px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;background:rgba(18,20,18,.55)}
+.drop.hot{border-color:#c5e86a;background:rgba(197,232,106,.08)}
+.hud{position:fixed;left:7vw;right:7vw;bottom:3vh;display:flex;justify-content:space-between;z-index:5;font-size:12px;color:#9aa89f}
+.ticks{display:flex;gap:5px}
+.ticks i{width:22px;height:3px;background:rgba(244,239,230,.18);display:block}
 .ticks i.on{background:#c5e86a}
-.paper{background:radial-gradient(1200px 600px at 20% 0%,#2a241c 0%,#0b0c0b 55%)}
 .dark{background:radial-gradient(1000px 700px at 80% -10%,#1c2420 0%,#070807 60%)}
-.warn{color:#f0c36a}
-.ok{color:#9be7b0}
-@media (max-width:900px){
-  .metrics,.panel{grid-template-columns:1fr}
-  h1{font-size:44px}
-  .scene{padding:7vh 6vw}
-}
+.paper{background:radial-gradient(1200px 600px at 20% 0%,#2a241c 0%,#0b0c0b 55%)}
+.warn{color:#f0c36a}.ok{color:#9be7b0}
+@media (max-width:900px){.metrics,.panel{grid-template-columns:1fr}h1{font-size:40px}}
 </style>
 </head>
 <body>
 <div class="stage dark" id="stage">
   <div class="grid"></div>
-  <div class="scan"></div>
   <div class="letter"></div>
 
   <section class="scene on" data-scene="0">
-    <div class="badge">Sanitized sample · not last night</div>
-    <div class="kicker" style="margin-top:18px">Warner Mountain Bookkeeping · Janet Lewis</div>
-    <h1>Last night becomes a receipt.</h1>
-    <p class="sub">Two walks. Command Center ranks the leak. Next Action names the owner and the proof. QuickBooks stays hers.</p>
+    <div class="badge">Sanitized sample · not her client</div>
+    <div class="kicker" style="margin-top:16px">Warner Mountain Bookkeeping · Janet Lewis</div>
+    <h1>The seat that changes what people do tomorrow.</h1>
+    <p class="sub">Not another dashboard. One operator seat. Drop last night. Get one next action. Night proof. Janet books the receipt.</p>
     <div class="row">
-      <button data-next>Begin the walks</button>
-      <button class="ghost" data-jump="4">Skip to cash proof</button>
+      <button data-next>Show the seat</button>
+      <button class="ghost" data-jump="6">Skip to cash proof</button>
     </div>
   </section>
 
   <section class="scene" data-scene="1">
-    <div class="kicker">Demo 1 · Command Center</div>
-    <h1>Location 07 is loud after nine.</h1>
-    <p class="sub">Fourteen-day window. Net $186,420. Voids after 9 PM sit at 2.2% against this house’s 1.4% baseline.</p>
+    <div class="kicker">Owner seat · behavior change</div>
+    <h1>One person. One move. Proof or it stays open.</h1>
+    <p class="sub">Kitchen manager, closer, FOH — each role gets today’s next action, not a five-tab report. A verbal yes does not close the day.</p>
     <div class="metrics">
-      <div class="metric"><span>Void rate</span><b>2.2%</b></div>
-      <div class="metric"><span>House baseline</span><b>1.4%</b></div>
-      <div class="metric"><span>Observed</span><b>$4,090</b></div>
-      <div class="metric"><span>Annualized signal</span><b>$38,589</b></div>
+      <div class="metric"><span>Seat</span><b>Owner 1</b></div>
+      <div class="metric"><span>Moves</span><b>≤3</b></div>
+      <div class="metric"><span>Proof</span><b>Required</b></div>
+      <div class="metric"><span>Books</span><b>Receipt</b></div>
     </div>
   </section>
 
   <section class="scene" data-scene="2">
-    <div class="kicker">Command Center · one leak</div>
-    <h1>One owner. One proof object.</h1>
+    <div class="kicker">Drop · phone photo · no POS password</div>
+    <h1>They drop the file. Or they photograph the invoice.</h1>
     <div class="panel">
-      <div class="card">
-        <h3>Next action</h3>
-        <p>Every void after 9 PM for the next three closes. Name the reason before the check closes.</p>
-        <p><b>Owner:</b> Closing shift lead</p>
-        <p><b>Proof:</b> Three signed close logs + void-reason export.</p>
+      <div class="drop" id="drop">
+        <div class="badge">Unverified until the source lands</div>
+        <p class="sub" id="dropState" style="margin-top:12px">Drag a Z, invoice PDF, or photo here. Same job shape as MarginEdge — not a replacement. File stays on this laptop.</p>
       </div>
       <div class="card">
-        <h3>Close rule</h3>
-        <p>Resolved only if the next three same-daypart closes drop under 1.8%.</p>
-        <p class="warn">$38,589 is a signal. Not booked savings. Verbal yes does not close.</p>
+        <h3>What the seat reads</h3>
+        <p>Close / Z. Invoice or truck photo. Labor card. Marketplace statement.</p>
+        <p>POS routing library covers Toast, PDQ, Square, Aloha, Simphony, Brink, Lightspeed, plus Clover / Revel / SpotOn as secondary.</p>
+        <p class="warn">Library ≠ live API into all ten. No portal passwords.</p>
       </div>
     </div>
   </section>
 
   <section class="scene" data-scene="3">
-    <div class="kicker">Handoff to the books</div>
-    <h1>Janet gets the receipt, not a story.</h1>
-    <p class="sub">Waiting on the monthly P&amp;L hides which shift created the leak. The package can carry the exception, the owner, and the proof object.</p>
+    <div class="kicker">Kitchen manager · sample coaching</div>
+    <h1>Tuesday. Cap $8,000. You’re at $6,000.</h1>
+    <div class="panel">
+      <div class="receipt">
+        <div class="kicker" style="color:#6b625c">Sample week · not last night</div>
+        <h2>Spend governance</h2>
+        <div class="line"><span>Weekly food-purchasing cap</span><b>$8,000</b></div>
+        <div class="line"><span>Already received / entered</span><b>$6,000</b></div>
+        <div class="line"><span>Room before Thursday truck</span><b>$2,000</b></div>
+        <div class="line"><span>Next truck</span><b>Thursday</b></div>
+      </div>
+      <div class="card">
+        <h3>Human coaching</h3>
+        <p>Do not order over $2,000 before Thursday. The cap is built from this house’s food sales, labor, and food-cost target — not a generic benchmark.</p>
+        <p class="warn">Prime cost stays HOLD without same-scope invoices and a count. Quiet vendor ≠ missed truck.</p>
+      </div>
+    </div>
   </section>
 
   <section class="scene" data-scene="4">
-    <div class="kicker">Demo 2 · Next Action</div>
+    <div class="kicker">Role next actions · today</div>
+    <h1>Each seat gets a different sentence.</h1>
+    <div class="panel">
+      <div class="card">
+        <h3>Kitchen</h3>
+        <p>Hold the Thursday order to $2,000. Photo the invoice when the truck hits the dock.</p>
+      </div>
+      <div class="card">
+        <h3>Closer</h3>
+        <p>Match the $68 cash gap to the slip. Attach the photo before you leave.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="5">
+    <div class="kicker">Demo 1 · Command Center</div>
+    <h1>Location 07 is loud after nine.</h1>
+    <p class="sub">Voids after 9 PM at 2.2% vs this house’s 1.4% baseline. $4,090 in two weeks. $38,589 annualized is a signal, not booked savings.</p>
+    <div class="metrics">
+      <div class="metric"><span>Void rate</span><b>2.2%</b></div>
+      <div class="metric"><span>Baseline</span><b>1.4%</b></div>
+      <div class="metric"><span>Observed</span><b>$4,090</b></div>
+      <div class="metric"><span>Signal</span><b>$38,589</b></div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene="6">
+    <div class="kicker">Demo 2 · Next Action cash</div>
     <h1>Yesterday closed. $68 still needs a receipt.</h1>
     <div class="panel">
       <div class="receipt">
@@ -132,44 +153,26 @@ button.ghost{background:transparent;color:var(--paper);border:1px solid rgba(244
         <div class="line"><span>Payouts</span><b>$38.00</b></div>
       </div>
       <div class="card">
-        <h3>Action 1 · Cash-proof</h3>
-        <p>Match the deposit slip to the close. Correct the entry or document the exception.</p>
-        <p><b>Owner:</b> Closing manager</p>
-        <p><b>Proof:</b> Slip or bank record.</p>
-        <p class="warn">Review work. Not theft. Not a shortage until the slip is matched.</p>
+        <h3>Cash-proof then payout-proof</h3>
+        <p>Owner: closing manager. Proof: slip or bank record. Then code the $38 before it hits a QBO class.</p>
+        <p class="warn">Review work. Not theft. Food stays HOLD.</p>
       </div>
     </div>
   </section>
 
-  <section class="scene" data-scene="5">
-    <div class="kicker">Next Action · ranked queue</div>
-    <h1>Cash first. Then code the $38.</h1>
-    <div class="panel">
-      <div class="card">
-        <h3>Action 2 · Payout-proof</h3>
-        <p>$38 needs receipt, purpose, and ledger bucket before it hits a QBO class.</p>
-        <p class="ok">This is the file she can book from.</p>
-      </div>
-      <div class="card">
-        <h3>Hold</h3>
-        <p>Food cost stays HOLD. No same-day invoices and count. Invoice day is not daily prime.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="scene" data-scene="6">
-    <div class="badge">Close the room here</div>
-    <h1>Which exception goes in the monthly package first?</h1>
-    <p class="sub">Cash proof. Third-party gross versus net. Or payout coding. She picks. We do not replace her close.</p>
+  <section class="scene" data-scene="7">
+    <div class="badge">Close</div>
+    <h1>Which receipt does Janet want in the monthly package?</h1>
+    <p class="sub">Cash proof. Kitchen spend cap. Third-party gross vs net. Emails stay drafts until a human sends. We do not replace her close.</p>
     <div class="row">
       <button data-jump="0">Replay</button>
-      <button class="ghost" data-jump="1">Command Center again</button>
+      <button class="ghost" data-jump="2">Drop again</button>
     </div>
   </section>
 </div>
 
 <div class="hud">
-  <div>Space or click to advance · Never 86'd</div>
+  <div>Space or click · Never 86'd operator seat</div>
   <div class="ticks" id="ticks"></div>
 </div>
 
@@ -177,12 +180,13 @@ button.ghost{background:transparent;color:var(--paper);border:1px solid rgba(244
 const scenes=[...document.querySelectorAll('.scene')];
 let i=0;
 const ticks=document.getElementById('ticks');
-scenes.forEach((_,n)=>{const d=document.createElement('i');if(n===0)d.className='on';ticks.appendChild(d);});
+scenes.forEach(()=>{const d=document.createElement('i');ticks.appendChild(d)});
+ticks.children[0].className='on';
 function show(n){
   i=Math.max(0,Math.min(scenes.length-1,n));
   scenes.forEach((s,idx)=>s.classList.toggle('on',idx===i));
   [...ticks.children].forEach((t,idx)=>t.classList.toggle('on',idx<=i));
-  document.getElementById('stage').className='stage '+(i>=4?'paper':'dark');
+  document.getElementById('stage').className='stage '+(i===2||i===3||i===6?'paper':'dark');
 }
 function next(){show(i+1)}
 document.body.addEventListener('click',e=>{
@@ -191,9 +195,15 @@ document.body.addEventListener('click',e=>{
   if(e.target.tagName!=='BUTTON') next();
 });
 window.addEventListener('keydown',e=>{
-  if(e.key===' ' || e.key==='ArrowRight'){e.preventDefault();next()}
+  if(e.key===' '||e.key==='ArrowRight'){e.preventDefault();next()}
   if(e.key==='ArrowLeft'){e.preventDefault();show(i-1)}
 });
+const drop=document.getElementById('drop');
+const state=document.getElementById('dropState');
+function nameFile(f){state.textContent='Loaded on this laptop: '+f.name+' — labeled Unverified. Not uploaded. Not a live prime-cost claim.';}
+;['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('hot')}));
+;['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('hot')}));
+drop.addEventListener('drop',e=>{const f=e.dataTransfer.files[0]; if(f) nameFile(f); e.stopPropagation();});
 </script>
 </body>
 </html>
