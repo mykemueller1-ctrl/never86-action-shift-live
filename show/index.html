@@ -1,14 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Never 86'd · Operator loop + Command Center · Janet walk</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
-</head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Never 86'd · Today’s walk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#15120f;--paper:#f4efe6;--gold:#d99a35;--lime:#c5e86a}
+*{box-sizing:border-box}html,body{margin:0;height:100%;background:#070807;color:var(--paper);font-family:Inter,system-ui,sans-serif}body{overflow:hidden}
+.stage{height:100vh;position:relative;background:radial-gradient(1100px 700px at 80% -10%,#1c2420,#070807 58%)}
+.scene{position:absolute;inset:0;display:none;padding:7vh 7vw;flex-direction:column;justify-content:center}
+.scene.on{display:flex;animation:up .55s ease both}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.kicker{letter-spacing:.18em;text-transform:uppercase;font-size:11px;color:#9aa89f;font-weight:700}
+.badge{display:inline-flex;width:max-content;border:1px solid var(--gold);color:#f0c36a;padding:5px 10px;border-radius:999px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(34px,5.4vw,76px);line-height:.94;margin:12px 0 14px;max-width:16ch}
+.sub{max-width:48ch;color:#c9d1c8;font-size:17px;line-height:1.5}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+button{appearance:none;border:0;cursor:pointer;font:inherit;font-weight:700;background:var(--lime);color:#111;padding:12px 16px;border-radius:999px}
+button.ghost{background:transparent;color:var(--paper);border:1px solid rgba(244,239,230,.25)}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(110px,1fr));gap:10px;margin-top:20px}
+.metric,.card{background:rgba(18,20,18,.88);border:1px solid rgba(244,239,230,.12);border-radius:18px;padding:16px}
+.metric b{display:block;font-family:"Instrument Serif",serif;font-size:28px;margin-top:6px}
+.metric span,.card h3{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#9aa89f}
+.panel{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:18px}
+.card h3{margin:0 0 8px;color:#f0c36a}.card p{margin:0 0 8px;color:#dce4db;line-height:1.45}
+.receipt{background:#fffaf3;color:var(--ink);padding:22px;border-radius:4px}.receipt h2{font-family:"Instrument Serif",serif;font-size:28px;margin:0 0 8px}
+.line{display:flex;justify-content:space-between;border-bottom:1px dashed #d9d0c7;padding:7px 0;font-size:15px}
+.drop{border:1.5px dashed rgba(197,232,106,.45);border-radius:22px;padding:26px;min-height:160px;background:rgba(18,20,18,.55)}
+.drop.hot{border-color:var(--lime)}
+.roles{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.roles button{border:1px solid rgba(244,239,230,.2);background:transparent;color:var(--paper)}
+.roles button.on{background:var(--lime);color:#111;border-color:var(--lime)}
+.stores{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.stores b{display:block;font-size:13px}
+.stores span{color:#9aa89f;font-size:12px}
+.hud{position:fixed;left:7vw;right:7vw;bottom:3vh;display:flex;justify-content:space-between;font-size:12px;color:#9aa89f;z-index:4}
+.ticks{display:flex;gap:5px}.ticks i{width:18px;height:3px;background:rgba(244,239,230,.18);display:block}.ticks i.on{background:var(--lime)}
+.push{position:fixed;right:24px;bottom:56px;width:300px;background:#121412;border:1px solid var(--lime);border-radius:16px;padding:14px;display:none;z-index:5}
+.push.on{display:block}
+.warn{color:#f0c36a}
+@media(max-width:900px){.metrics,.panel,.stores{grid-template-columns:1fr}.push{left:16px;right:16px;width:auto}}
+</style></head>
 <body>
-<p>See show site in artifacts. If this stub landed, replace with full walk.</p>
-<p><a href="../janet-demo/index.html">Director-cut fallback</a></p>
-</body>
-</html>
+<div class="stage" id="stage">
+<section class="scene on">
+  <div class="badge">Vision demo · 3:00 PM · not a live hookup</div>
+  <div class="kicker" style="margin-top:14px">Warner Mountain Bookkeeping · Janet Lewis</div>
+  <h1>The loop first. Command Center after.</h1>
+  <p class="sub">One operator seat. File or photo in. Owner named. Proof attached. Then the same leak one altitude up for the group.</p>
+  <div class="row"><button data-next>Start Act 1</button><button class="ghost" data-jump="6">Skip to Command Center</button></div>
+</section>
+<section class="scene">
+  <div class="kicker">Act 1 · small operator</div>
+  <h1>One person. One move. Proof or it stays open.</h1>
+  <p class="sub">Kitchen, closer, FOH each get today’s sentence. A verbal yes does not close the day. She still owns QuickBooks.</p>
+  <div class="metrics"><div class="metric"><span>Seat</span><b>Owner 1</b></div><div class="metric"><span>Moves</span><b>≤3</b></div><div class="metric"><span>Proof</span><b>Required</b></div><div class="metric"><span>Books</span><b>Receipt</b></div></div>
+</section>
+<section class="scene">
+  <div class="kicker">Drop · phone photo</div>
+  <h1>They drop the file. Or they photograph the ticket.</h1>
+  <div class="panel"><div class="drop" id="drop"><div class="badge">Unverified until the source lands</div><p class="sub" id="dropState" style="margin-top:12px">Drag a Z, invoice PDF, or photo. Stays on this laptop. Same motion as MarginEdge — not a replacement.</p></div>
+  <div class="card"><h3>No portal password</h3><p>Close. Invoice photo. Labor card. Marketplace statement.</p><p class="warn">POS library ≠ ten live APIs. Sysco is not connected in this meeting.</p></div></div>
+</section>
+<section class="scene">
+  <div class="kicker">Kitchen coach · sample</div>
+  <h1>Tuesday. Cap $8,000. You’re at $6,000.</h1>
+  <div class="panel"><div class="receipt"><div class="kicker" style="color:#6b625c">Sample week · not last night</div><h2>Spend governance</h2><div class="line"><span>Weekly cap</span><b>$8,000</b></div><div class="line"><span>Already in</span><b>$6,000</b></div><div class="line"><span>Room before Thursday</span><b>$2,000</b></div><div class="line"><span>Next truck</span><b>Thursday</b></div></div>
+  <div class="card"><h3>Human coaching</h3><p>Do not order over $2,000 before Thursday’s truck.</p><p class="warn">No count → food HOLD.</p></div></div>
+</section>
+<section class="scene">
+  <div class="kicker">Cash proof</div>
+  <h1>Yesterday closed. $68 still needs a slip.</h1>
+  <div class="panel"><div class="receipt"><h2>Business-day close</h2><div class="line"><span>Gross / tickets</span><b>$4,820 · 187</b></div><div class="line"><span>Expected cash</span><b>$610.00</b></div><div class="line"><span>Entered deposit</span><b>$542.00</b></div><div class="line"><span>Variance</span><b>$68.00</b></div><div class="line"><span>Payouts to code</span><b>$38.00</b></div></div>
+  <div class="card"><h3>Review work</h3><p>Owner: closer. Proof: slip or bank record. Not theft.</p></div></div>
+</section>
+<section class="scene">
+  <div class="kicker">3P gross vs net</div>
+  <h1>Commission is not the whole cost.</h1>
+  <div class="panel"><div class="receipt"><h2>Marketplace statement</h2><div class="line"><span>Eligible sales</span><b>$1,240</b></div><div class="line"><span>Commission</span><b>$248</b></div><div class="line"><span>Promo funded by store</span><b>$61</b></div><div class="line"><span>Expected payout</span><b>$931</b></div></div>
+  <div class="card"><h3>Janet’s monthly question</h3><p>Gross vs net vs bank. Missing statement stays Open.</p><p class="warn">Sample math. Not her client.</p></div></div>
+</section>
+<section class="scene">
+  <div class="badge">Act 2</div>
+  <h1>Same leak. Right altitude.</h1>
+  <p class="sub">C-level sees dollars. Area sees the cluster. District owns the store. GM gets tonight. Push goes to one name.</p>
+  <div class="metrics"><div class="metric"><span>Stores</span><b>16</b></div><div class="metric"><span>Orders</span><b>545,677</b></div><div class="metric"><span>Checked</span><b>$15.72M</b></div><div class="metric"><span>Labeled leak</span><b>$1.81M</b></div></div>
+</section>
+<section class="scene">
+  <div class="kicker">Command Center · role desk</div>
+  <h1>Click the seat. Watch the push.</h1>
+  <div class="roles" id="roles"></div>
+  <div class="panel"><div class="card" id="view"></div>
+  <div class="card"><h3>Stores in District 2</h3>
+    <div class="stores">
+      <div class="metric"><b>Loc 05</b><span>Quiet</span></div>
+      <div class="metric"><b>Loc 07</b><span>2.2% voids</span></div>
+      <div class="metric"><b>Loc 11</b><span>Watch</span></div>
+      <div class="metric"><b>Loc 14</b><span>Quiet</span></div>
+    </div>
+    <p class="warn" style="margin-top:10px">$1.81M labeled after walk-back. Not booked. Customer name off this page.</p>
+  </div></div>
+</section>
+<section class="scene">
+  <div class="badge">Close</div>
+  <h1>Which receipt in the first monthly?</h1>
+  <p class="sub">Kitchen spend rail. Cash proof. Third-party gross vs net. Emails stay drafts until a human sends.</p>
+  <div class="row"><button data-jump="0">Replay</button><button class="ghost" data-jump="7">Roles again</button></div>
+</section>
+</div>
+<div class="push" id="push"></div>
+<div class="hud"><div>Space or click · Never 86'd</div><div class="ticks" id="ticks"></div></div>
+<script>
+const scenes=[...document.querySelectorAll('.scene')];let i=0;const ticks=document.getElementById('ticks');
+scenes.forEach(()=>ticks.appendChild(document.createElement('i')));ticks.children[0].className='on';
+function show(n){i=Math.max(0,Math.min(scenes.length-1,n));scenes.forEach((s,idx)=>s.classList.toggle('on',idx===i));[...ticks.children].forEach((t,idx)=>t.classList.toggle('on',idx<=i));document.getElementById('push').classList.toggle('on',i===7);}
+function next(){show(i+1)}
+document.body.addEventListener('click',e=>{if(e.target.dataset.next!==undefined)return next();if(e.target.dataset.jump!==undefined)return show(+e.target.dataset.jump);if(e.target.closest('.roles'))return;if(e.target.tagName!=='BUTTON')next();});
+window.addEventListener('keydown',e=>{if(e.key===' '||e.key==='ArrowRight'){e.preventDefault();next()}if(e.key==='ArrowLeft'){e.preventDefault();show(i-1)}});
+const drop=document.getElementById('drop'),state=document.getElementById('dropState');
+;['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('hot')}));
+;['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('hot')}));
+drop.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)state.textContent='Loaded on this laptop: '+f.name+' — Unverified. Not uploaded.';e.stopPropagation();});
+const roles=[
+  {l:'C-level',p:'Network · late-night voids concentrated in District 2.',v:'<h3>CEO desk</h3><p>Rank by dollars this week. $1.81M labeled across 16 stores. First question: which district owns the next close.</p>'},
+  {l:'CFO / books',p:'$68 cash variance at Location 07 has no slip.',v:'<h3>Books desk</h3><p>She needs the receipt, not another chart. Cash proof, 3P gross vs net, payout coding.</p>'},
+  {l:'Area',p:'Area East · two stores loud after nine.',v:'<h3>Area leader</h3><p>Four stores. Two share the late-night void pattern. One close-reason rule for the next three nights.</p>'},
+  {l:'District',p:'Location 07 · 2.2% vs 1.4% baseline.',v:'<h3>District manager</h3><p>Observed $4,090 / 14 days. Next action sits on the closing lead. Proof: three signed close logs.</p>'},
+  {l:'GM',p:'Tonight · name the void reason before the check closes.',v:'<h3>GM</h3><p>Tonight only. Every void after 9pm gets a reason. Resolved only if the next three same-daypart closes drop under 1.8%.</p>'}
+];
+const wrap=document.getElementById('roles');
+roles.forEach((r,idx)=>{const b=document.createElement('button');b.textContent=r.l;if(!idx)b.className='on';b.onclick=()=>pick(idx);wrap.appendChild(b);});
+function pick(n){[...wrap.children].forEach((b,idx)=>b.classList.toggle('on',idx===n));document.getElementById('view').innerHTML=roles[n].v;document.getElementById('push').innerHTML='<strong>Push · '+roles[n].l+'</strong><div style="margin-top:6px;color:#dce4db">'+roles[n].p+'</div>';}
+pick(0);
+</script>
+</body></html>
