@@ -1,1 +1,307 @@
-PLACEHOLDER
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>One Seat — invoice, labor, plate | Never86'd</title>
+  <meta name="description" content="Public sample seat dialed from real Community Tap papers. Honesty labels. Blank is not $0. SAMPLE is not recovered money.">
+  <style>
+    :root {
+      --ink: #15120f;
+      --muted: #6b625c;
+      --line: #d9d0c7;
+      --paper: #f7f1e8;
+      --panel: #fffaf3;
+      --red: #c74332;
+      --green: #2b7a58;
+      --blue: #1f5f78;
+      --sample: #8a5a00;
+      --unverified: #1f5f78;
+      --missing: #6b625c;
+      --verified: #2b7a58;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fffaf1 0%, #f2e9de 55%, #e9ded1 100%);
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,250,243,.92);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; }
+    .mark {
+      width: 40px; height: 40px; border: 2px solid var(--ink);
+      display: grid; place-items: center; font-size: 11px; line-height: 1; background: var(--panel);
+    }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase;
+      border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; background: var(--panel);
+    }
+    .pill.sample { color: var(--sample); border-color: #e2c48a; background: #fff6e4; }
+    .pill.unverified { color: var(--unverified); border-color: #a9c8d5; background: #eef7fb; }
+    .pill.missing { color: var(--missing); border-color: #cfc7bf; background: #f3efe9; }
+    .pill.verified { color: var(--verified); border-color: #9bcbb3; background: #e8f6ef; }
+    main { max-width: 1100px; margin: 0 auto; padding: 28px 20px 64px; }
+    h1 { margin: 0 0 10px; font-size: clamp(34px, 6vw, 56px); line-height: .95; letter-spacing: -0.02em; }
+    .lede { margin: 0 0 22px; color: var(--muted); font-size: 17px; line-height: 1.5; max-width: 42rem; }
+    .warn {
+      border: 1px solid #e2c48a; background: #fff6e4; border-radius: 10px;
+      padding: 12px 14px; margin-bottom: 22px; font-size: 14px; line-height: 1.45;
+    }
+    .doors {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px;
+    }
+    .door {
+      border: 2px solid var(--ink); background: var(--panel); border-radius: 10px;
+      padding: 14px 12px; text-align: left; cursor: pointer; font: inherit; font-weight: 800;
+    }
+    .door small { display: block; margin-top: 4px; color: var(--muted); font-weight: 600; font-size: 12px; }
+    .door.active { background: var(--ink); color: #fff; }
+    .door.active small { color: #d9d0c7; }
+    .panel {
+      border: 1px solid var(--line); background: var(--panel); border-radius: 14px;
+      padding: 20px; box-shadow: 0 10px 30px rgba(21,18,15,.04);
+    }
+    .panel h2 { margin: 0 0 6px; font-size: 22px; }
+    .panel .meta { margin: 0 0 16px; color: var(--muted); font-size: 14px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .card {
+      border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: #fff;
+    }
+    .card .label { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .card .num { font-size: 28px; font-weight: 900; letter-spacing: -0.02em; }
+    .card .note { margin-top: 6px; font-size: 13px; color: var(--muted); line-height: 1.4; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+    .math {
+      margin-top: 14px; padding: 12px 14px; border-radius: 10px; background: #f3efe9;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; line-height: 1.5;
+    }
+    .action {
+      margin-top: 16px; padding: 14px; border-left: 4px solid var(--red); background: #fff;
+      border-radius: 0 10px 10px 0;
+    }
+    .action strong { display: block; margin-bottom: 4px; }
+    footer {
+      margin-top: 28px; color: var(--muted); font-size: 13px; line-height: 1.5;
+    }
+    .hidden { display: none; }
+    @media (max-width: 800px) {
+      .doors, .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="mark">86</div>
+      <div>Never86'd · One Seat</div>
+    </div>
+    <div class="badge-row">
+      <span class="pill verified">Verified</span>
+      <span class="pill sample">SAMPLE</span>
+      <span class="pill unverified">UNVERIFIED</span>
+      <span class="pill missing">MISSING</span>
+    </div>
+  </header>
+
+  <main>
+    <h1>You run the restaurant. Let's check the numbers.</h1>
+    <p class="lede">One Seat = three doors: invoice, labor, plate. Drop papers. See honesty labels. Take one next move tonight. Blank is not $0. This public sample is shaped from real Community Tap papers — not Command Center, not a live operator login.</p>
+
+    <div class="warn">
+      <strong>Honesty:</strong> Verified means the dollar is on a paper we opened (menu, Z report, costed recipe, or invoice).
+      SAMPLE means demo shape only. UNVERIFIED means the formula ran but papers were not matched.
+      MISSING means the line is absent — never invent a dollar.
+    </div>
+
+    <div class="doors" role="tablist" aria-label="One Seat doors">
+      <button class="door active" data-door="invoice" type="button">01 · Invoice<small>Same SKU / pack across two invoices</small></button>
+      <button class="door" data-door="labor" type="button">02 · Labor<small>Labor $ ÷ net sales</small></button>
+      <button class="door" data-door="plate" type="button">03 · Plate<small>Ingredient lines → food cost %</small></button>
+    </div>
+
+    <section id="door-invoice" class="panel" role="tabpanel">
+      <h2>What went up on my invoice?</h2>
+      <p class="meta">Mozzarella · Performance Foodservice · Roma NH050 · invoice 2025-06-13 · prior pack still blank</p>
+      <div class="grid-2">
+        <div class="card">
+          <div class="label">This invoice (5 cases)</div>
+          <div class="num">$568.80</div>
+          <div class="note">5 CS · $113.76 / case · Verified Performance line</div>
+        </div>
+        <div class="card">
+          <div class="label">Per case</div>
+          <div class="num">$113.76</div>
+          <div class="note">$568.80 ÷ 5 · Computed from Verified</div>
+        </div>
+        <div class="card">
+          <div class="label">Prior matching invoice</div>
+          <div class="num" style="font-size:22px"><em>MISSING</em></div>
+          <div class="note">No paired earlier same-SKU case on Drive — AT STAKE stays blank</div>
+        </div>
+        <div class="card">
+          <div class="label">Honesty</div>
+          <div class="badge-row" style="margin-top:8px">
+            <span class="pill verified">Verified invoice</span>
+            <span class="pill missing">MISSING prior</span>
+          </div>
+          <div class="note">Inventory also lists mozz ~$2.24/lb. Old demo $48→$56 was SAMPLE fiction — retired. Vendors: Performance, Sawyer, Northern Lights, Humes.</div>
+        </div>
+      </div>
+      <div class="math">
+        Verified: mozzarella 5 CS = $568.80 (Performance, 2025-06-13)<br>
+        Per case = $568.80 ÷ 5 = $113.76 (Computed)<br>
+        Prior same SKU/pack = MISSING → drift % and AT STAKE = MISSING<br>
+        We do not invent a prior price to force a percent.
+      </div>
+      <div class="action">
+        <strong>Next move</strong>
+        Pull the next Performance mozzarella line with the same pack code. When both sides match, AT STAKE becomes real dollars.
+      </div>
+    </section>
+
+    <section id="door-labor" class="panel hidden" role="tabpanel">
+      <h2>Why did labor eat the night?</h2>
+      <p class="meta">PDQ Historical Time Clock · 7/26/2026–8/8/2026 · matched labor $ + sales</p>
+      <div class="grid-2">
+        <div class="card">
+          <div class="label">Labor $</div>
+          <div class="num">$22,850.88</div>
+          <div class="note">Two-week time clock · Verified</div>
+        </div>
+        <div class="card">
+          <div class="label">Net sales</div>
+          <div class="num">$88,652.83</div>
+          <div class="note">Same window · Verified</div>
+        </div>
+        <div class="card">
+          <div class="label">Labor %</div>
+          <div class="num">25.8%</div>
+          <div class="note">$22,850.88 ÷ $88,652.83 · Verified</div>
+        </div>
+        <div class="card">
+          <div class="label">Honesty</div>
+          <div class="badge-row" style="margin-top:8px">
+            <span class="pill verified">Verified</span>
+          </div>
+          <div class="note">Daily Z nights often land ~27–32% labor. Soft 9/15/25 hit 49%. H1 workbook shows 33.5% vs 28% target — separate rollup.</div>
+        </div>
+      </div>
+      <div class="math">
+        labor% = labor$ ÷ sales<br>
+        22850.88 ÷ 88652.83 = 0.25776 → 25.8%<br>
+        Source: 7-26-2026 to 8-8-2026 Historical_Time_Clock_Report
+      </div>
+      <div class="action">
+        <strong>Next move</strong>
+        Compare schedule vs clock-out for the longest shift. Fix the silence between paper and POS before you cut labor.
+      </div>
+    </section>
+
+    <section id="door-plate" class="panel hidden" role="tabpanel">
+      <h2>What does the plate actually cost?</h2>
+      <p class="meta">Bacon Bleu Burger · CTAP costed recipe · menu new price from updated menu</p>
+      <table>
+        <thead>
+          <tr><th>Ingredient</th><th>Qty</th><th>Cost</th><th>Label</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Beef patty (1/3 lb)</td><td>5.33 oz</td><td>$2.07</td><td><span class="pill verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td>Bacon</td><td>2 oz</td><td>$0.84</td><td><span class="pill verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td>Bleu cheese</td><td>2 oz</td><td>$0.50</td><td><span class="pill verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td>Lettuce / tomato / pickle / onion</td><td>4 oz</td><td>$0.22</td><td><span class="pill verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td>Bun</td><td>1</td><td>$0.40</td><td><span class="pill verified">Verified</span></td>
+          </tr>
+          <tr>
+            <td>Side / oil / waste line</td><td>—</td><td><em>MISSING</em></td><td><span class="pill missing">MISSING</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="card">
+          <div class="label">Menu price (new)</div>
+          <div class="num">$14.49</div>
+          <div class="note">CTAP_Updated_Menu · Verified</div>
+        </div>
+        <div class="card">
+          <div class="label">Food cost (known lines)</div>
+          <div class="num">$4.09</div>
+          <div class="note">Costed recipe total · Verified · side/oil stays MISSING ≠ $0</div>
+        </div>
+        <div class="card">
+          <div class="label">Food cost %</div>
+          <div class="num">28.2%</div>
+          <div class="note">$4.09 ÷ $14.49 · Verified known lines only</div>
+        </div>
+        <div class="card">
+          <div class="label">Also on the menu</div>
+          <div class="note" style="margin-top:8px">Med cheese pizza sells $16.99 (Verified). Dough ball med $0.39 Verified; mozz ~$0.14/oz Verified; sauce + oil still MISSING — we do not invent a full $4 plate.</div>
+          <div class="badge-row" style="margin-top:8px">
+            <span class="pill verified">Verified burger</span>
+            <span class="pill missing">MISSING pizza recipe</span>
+          </div>
+        </div>
+      </div>
+      <div class="math">
+        food $ = sum of known ingredient lines = $4.09<br>
+        food% = food $ ÷ menu price = 4.09 ÷ 14.49 = 28.2%<br>
+        MISSING side/oil is blank — not zeroed into the plate.
+      </div>
+      <div class="action">
+        <strong>Next move</strong>
+        Cost the missing side (or oil) from the next invoice, then re-run the plate before you touch the menu.
+      </div>
+    </section>
+
+    <footer>
+      Built by Myke Mueller for 1–5 unit independents. Free first owner seat lives on
+      <a href="https://never86.ai">never86.ai</a>.
+      Public sample dialed from CTAP Drive papers (Sep–Oct 2025 Z reports, updated menu, costed recipes, inventory master) — no Command Center, no invented dollars.
+    </footer>
+  </main>
+
+  <script>
+    const doors = document.querySelectorAll('.door');
+    const panels = {
+      invoice: document.getElementById('door-invoice'),
+      labor: document.getElementById('door-labor'),
+      plate: document.getElementById('door-plate')
+    };
+    doors.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        doors.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        Object.keys(panels).forEach((key) => {
+          panels[key].classList.toggle('hidden', key !== btn.dataset.door);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
