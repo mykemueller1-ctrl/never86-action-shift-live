@@ -1,0 +1,1 @@
+{"name":"never86-one-seat","version":"1.0.0","private":true,"type":"module","scripts":{"start":"node server.js","test":"NODE_ENV=test node --test"},"engines":{"node":">=20"}}
