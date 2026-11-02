@@ -1,14 +1,57 @@
 {
-  "functions": { "api/index.js": { "includeFiles": "public/**" } },
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "public/**"
+    }
+  },
   "rewrites": [
-    { "source": "/seat", "destination": "/api/index" },
-    { "source": "/check/:page", "destination": "/api/index" },
-    { "source": "/signin", "destination": "/api/index" },
-    { "source": "/auth/:path*", "destination": "/api/index" },
-    { "source": "/api/session", "destination": "/api/index" },
-    { "source": "/api/documents", "destination": "/api/index" },
-    { "source": "/api/documents/:id", "destination": "/api/index" },
-    { "source": "/app.css", "destination": "/api/index" },
-    { "source": "/app.js", "destination": "/api/index" }
+    {
+      "source": "/",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/api/health",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/api/documents/:id/original",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/seat",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/check/:page",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/signin",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/auth/:path*",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/api/session",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/api/documents",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/api/documents/:id",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/app.css",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/app.js",
+      "destination": "/api/index"
+    }
   ]
 }
