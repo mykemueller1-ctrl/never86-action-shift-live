@@ -18,7 +18,7 @@ const oauth = {
 const send = (res, status, body, type = 'text/html; charset=utf-8', headers = {}) => { res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store', ...headers }); res.end(body); };
 const redirect = (res, location, headers = {}) => send(res, 303, '', 'text/plain', { Location: location, ...headers });
 const body = async req => { const chunks=[]; for await (const c of req) chunks.push(c); return new URLSearchParams(Buffer.concat(chunks).toString()); };
-const html = (title, content) => `<!doctype html><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/app.css"><title>${title} · One Seat</title><main class="narrow"><a href="/seat" class="brand">Never86'd · One Seat</a>${content}</main>`;
+const html = (title, content) => `<!doctype html><meta name="viewport" content="width=device-width"><link rel="stylesheet" href="/app.css"><title>${title} · One Seat</title><main class="narrow"><a href="/seat" class="brand">Action Shift · One Seat</a>${content}</main>`;
 const sessionUser = req => { const p = verify(parseCookies(req.headers.cookie).one_seat, { purpose: 'session' }); return p ? { id: p.email, email: p.email, restaurantId: p.restaurantId, role: p.role } : null; };
 const csrfOkay = req => { const c = parseCookies(req.headers.cookie); return Boolean(c.csrf && req.headers['x-csrf-token'] === c.csrf && req.headers.origin === origin); };
 
